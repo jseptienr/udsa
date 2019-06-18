@@ -1,0 +1,31 @@
+Problem #1: LRU cache
+In order to keep track of recently used items we use two main data structures a hash table and a doubly linked list. The hash table is used to keep a reference from the key to the node element in the doubly linked list in order to retrieve the item in O(1) time as opposed to traversing the list which would be a O(n) operation.
+
+For the set operation, there 3 specific cases: when the key value pair is already present, when the cache is not at capacity and the key value pair is not present, and the default case where the key value pair is not present but we are at capacity
+
+When the key value pair is already present, we get the node reference through the key from the hash table and then perform a remove operation, linking the previous node to the next node, and then appending the node to the end of the list signifying the last recently used. All of this operations are each O(1) since we do not need to do any traversal.
+
+When the key value pair is not present and we are at not capacity, we simply append the node to the end of the list and add it to the hash table. All of this operations are each O(1) since we do not need to do any traversal.
+
+When the key value pair is not present and we are at capacity, we need to remove the lastly used item from the list represented as the head of the list, remove it from the hash table, and then simply append the new key value pair to the list and add it to the hash table. All of this operations are each O(1) since we do not need to do any traversal.
+
+For the get operation, we check if the item is not in the hash table, a O(1) operation, and return -1 if not present. Else we retrieve the item and then perform the a remove operation from the list and an append operation in order to make this item the last recently used, and then return the value.
+
+Problem #2: Find files beneath path with particular suffix
+This problem can be solved recursively as each directory level is a subset of the problem as a whole. The solution consist of iterating through all elements in the directly and checking if they are a file and if they have the target suffix, and it is appended to a list if it matches these criteria. If the element is a directory, then we recursively call the function which will return a list with the matches under that level and the original list can be extended to be finally returned.
+This operation is  O(n), with n representing the number of items in the whole directory structure, since we are only iterating once through each element.
+
+Problem #3:
+
+Problem #4: User in group
+This problem consist of identifying if user is part of a group or any of the subgroups, and can be solved recursively. We check if the user is part of the group, if it is then we return true. Else  we iterate through the subgroups and call the same method recursively with the user and subgroup as parameters. If the user is in any of the subgroups, the function returns true. This has a O(n) efficiency better represented as O(m*n) where m is the number of subgroups and in the a worst case scenario where there are many users and subgroups this can have a relatively high impact in efficiency.
+
+Problem #5: Blockchain
+This problem creates a simple blockchain using a linked list as its primary data structure. Appending an element to the blockchain consist of creating a block with the new data, timestamp, and previous block hash. The hash for this block is calculated using SHA256 algorithm and can later be reference for a future block addition. The special case for appending a block consists of the genesis block that has a previous hash of 0 since there are no previous blocks in the blockchain. The linked list references the latest appended block as its head, allowing the addition operation to be O(1) since no traversal is required.
+
+Problem #6: Union and Intersection
+The union method iterates through list one and appends all the values to a new list and also add the values to a python set. The python set serves as a helper  in order to later check if an item is already present in the list in O(1) as opposed to having to iterate through the new list due to hashing. The second list is traversed an the values are only appended to the new list if the value is not present in the set. The total runtime efficiency is O(n), with n being the total number of values in the two lists.
+
+The intersection method iterates through the first list and again uses a python set to store all the elements present in the list. Then we iterate through the second list and use a second set to keep track of the items that are added to the new list. If an item on the second list is present in the unique_values set and is not already present in the existing_values set, then the item is appended to the list. The runtime efficiency of this operation is again O(n), with n being the total number of values in the two lists.
+
+By using hash sets as helpers, the efficiency of both algorithm is improved as it prevents traversing through the lists every time we need to check if an element is present in the resulting list. Otherwise
