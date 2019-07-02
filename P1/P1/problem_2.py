@@ -18,8 +18,15 @@ def find_files(suffix, path):
        a list of paths
     """
     file_matches = []
-    files = os.listdir(path)
-    #print(l)
+
+    if suffix is '':
+        return file_matches
+
+    try:
+        files = os.listdir(path)
+    except:
+        return file_matches
+
     for file in files:
         filepath = path + '/' + file
         if os.path.isfile(filepath):
@@ -29,7 +36,17 @@ def find_files(suffix, path):
             file_matches.extend(find_files(suffix, filepath))
     return file_matches
 
-#print_directory('/home/septienj/projects/udacity-dsa/python/P1/testdir')
+
+
+# TESTS
 matches = find_files('.c', 'testdir')
-for match in matches:
-    print(match)
+print('pass' if len(matches) == 4 and matches[0].endswith('.c') else 'fail')
+
+matches = find_files('.c', '')
+print('pass' if len(matches) == 0 else 'fail')
+
+matches = find_files('', 'testdir')
+print('pass' if len(matches) == 0 else 'fail')
+
+matches = find_files('.xxxx', 'testdir')
+print('pass' if len(matches) == 0 else 'fail')

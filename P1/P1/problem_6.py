@@ -93,9 +93,12 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
-print('Test 1')
-print (union(linked_list_1,linked_list_2))
-print (intersection(linked_list_1,linked_list_2))
+u1 = union(linked_list_1,linked_list_2)
+i1 = intersection(linked_list_1,linked_list_2)
+
+print('Pass' if '3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 -> ' == str(u1) else 'Fail')
+print('Pass' if '6 -> 4 -> 21 -> ' == str(i1) else 'Fail')
+
 
 # Test case 2
 
@@ -111,9 +114,11 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
-print('Test 2')
-print (union(linked_list_3,linked_list_4))
-print (intersection(linked_list_3,linked_list_4))
+u2 = union(linked_list_3,linked_list_4)
+i2 = intersection(linked_list_3,linked_list_4)
+
+print('Pass' if '3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 23 -> 1 -> 7 -> 8 -> 9 -> 11 -> 21 -> ' == str(u2) else 'Fail')
+print('Pass' if '' == str(i2) else 'Fail')
 
 # Test case 3: equal lists union and intersection are the same
 
@@ -129,6 +134,68 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
-print('Test 3')
-print (union(linked_list_3,linked_list_4))
-print (intersection(linked_list_3,linked_list_4))
+u3 = union(linked_list_3,linked_list_4)
+i3 = intersection(linked_list_3,linked_list_4)
+
+print('Pass' if '3 -> 2 -> 4 -> 35 -> 6 -> 65 -> ' == str(u3) else 'Fail')
+print('Pass' if '3 -> 2 -> 4 -> 35 -> 6 -> 65 -> ' == str(i3) else 'Fail')
+
+# Test case 4: empty list 1
+
+linked_list_3 = LinkedList()
+linked_list_4 = LinkedList()
+
+element_1 = [3,2,4,35,6,65]
+element_2 = []
+
+for i in element_1:
+    linked_list_3.append(i)
+
+for i in element_2:
+    linked_list_4.append(i)
+
+u3 = union(linked_list_3,linked_list_4)
+i3 = intersection(linked_list_3,linked_list_4)
+
+print('Pass' if '3 -> 2 -> 4 -> 35 -> 6 -> 65 -> ' == str(u3) else 'Fail')
+print('Pass' if '' == str(i3) else 'Fail')
+
+# Test case 5: empty list 2
+
+linked_list_3 = LinkedList()
+linked_list_4 = LinkedList()
+
+element_1 = []
+element_2 = [1,7,8,9,11,21,1]
+
+for i in element_1:
+    linked_list_3.append(i)
+
+for i in element_2:
+    linked_list_4.append(i)
+
+u3 = union(linked_list_3,linked_list_4)
+i3 = intersection(linked_list_3,linked_list_4)
+
+print('Pass' if '1 -> 7 -> 8 -> 9 -> 11 -> 21 -> ' == str(u3) else 'Fail')
+print('Pass' if '' == str(i3) else 'Fail')
+
+# Test case 6: empty both
+
+linked_list_3 = LinkedList()
+linked_list_4 = LinkedList()
+
+element_1 = []
+element_2 = []
+
+for i in element_1:
+    linked_list_3.append(i)
+
+for i in element_2:
+    linked_list_4.append(i)
+
+u3 = union(linked_list_3,linked_list_4)
+i3 = intersection(linked_list_3,linked_list_4)
+
+print('Pass' if '' == str(u3) else 'Fail')
+print('Pass' if '' == str(i3) else 'Fail')

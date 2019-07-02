@@ -32,7 +32,8 @@ class DoublyLinkedList:
             self.remove_head()
         else:
             node.previous.next = node.next
-            node.next.previous = node.previous
+            if node.next:
+                node.next.previous = node.previous
             self.size -= 1
 
     def remove_head(self):
@@ -74,6 +75,9 @@ class LRU_Cache(object):
 
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
+        if self.capacity == 0:
+            return
+
         if key in self.hash_table:
             node = self.hash_table[key]
             self.dlist.remove(node)
@@ -95,18 +99,32 @@ our_cache = LRU_Cache(5)
 
 our_cache.set(1, 1)
 our_cache.set(2, 2)
-our_cache.get(1)       # returns 1
-our_cache.get(2)       # returns 2
-our_cache.get(3)       # return -1
 print ("Pass" if our_cache.get(1) == 1 else "Fail")
 print ("Pass" if our_cache.get(2) == 2 else "Fail")
 print ("Pass" if our_cache.get(3) == -1 else "Fail")
-# hat you need is to two data structures really,
-#
-# a doubly linked list that maintains the ordering, where the nodes hold the values,
-# and a hash table (dictionary) that gives you direct access to nodes in the list via keys, so you can get to the values in the nodes in O(1) without traversing the list.
-# The operations should do the following:
-#
-# adding a new key-value pair would add a new node to the end of the list (making the node most recent). The node will hold the value. And you need to add a <key-node reference> entry in the dictionary to find that node later.
-# every time you retrieve a value via a key, you use the dictionary to get to the node directly and read its value, then you'll have to move that node from anywhere in the list to the end of the list to make it the most recent.
-# whenever you need to add a new key-value pair while the cache is at capacity, you'll have to remove the oldest entry from the list, and remove it's corresponding entry from the dictionary.
+
+# TEST 2: 0 capacity does not add any elements
+cache = LRU_Cache(0)
+cache.set(1, 1)
+print('Pass' if cache.dlist.head == None else 'Fail')
+print("Pass" if cache.get(3) == -1 else "Fail")
+
+# TEST 3: reached max capacity removes lastly used items
+cache = LRU_Cache(2)
+cache.set(1, 1)
+cache.set(2, 2)
+print('Pass' if cache.dlist.get_size() == 2 else 'Fail')
+cache.set(3, 3)
+print('Pass' if cache.get(1) == -1 else 'Fail')
+print('Pass' if cache.get(3) == 3 else 'Fail')
+
+# TEST 4: reached max capacity removes lastly used items
+cache = LRU_Cache(5)
+cache.set(1, 1)
+cache.set(2, 2)
+cache.set(3, 3)
+cache.set(4, 4)
+cache.set(5, 5)
+cache.set(6, 6)
+print('Pass' if cache.dlist.get_size() == 5 else 'Fail')
+print('Pass' if cache.get(1) == -1 else 'Fail')
