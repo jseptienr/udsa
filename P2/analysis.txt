@@ -1,0 +1,57 @@
+Problem #1: Square Root
+The square root problem can be solved through a binary search approach, where we
+search for a solution that when squared matches the target in the interval
+of (0, N). If the current guess matches the target we return that answer, else we
+compare if the current answer is larger or smaller that the solution in order to
+look in that half of the range. Since we are halving the search space by half this
+will result in a worst-case time complexity of O(logN) and space complexity of O(1).
+
+Problem #2: Rotated Array search
+The approach to solve this problem involves first determining the index at which
+the array is rotated (the pivot). Given that we know that there are no duplicates
+and that the array is sorted but for the rotation, this step can be accomplished
+with binary search for the element whose next element is smaller. This will result
+in a worst case time complexity of O(logN) and space complexity of O(1).
+Once the pivot has been identified we can search for the index of the actual target,
+if the target is larger than the first item in the rotated list we can search in
+the section up to the pivot, else we search in the section after the pivot. Since
+this is a binary search approach this will result in a worst case time complexity of
+O(logN) and space complexity of O(1), for a total complexity of approximately O(2logN).
+
+Problem #3: Largest sum
+This problem can be solved using the knowledge that the largest sum will be
+generated as long as the largest integers are used in the largest decimal position
+for a given number. As such, this becomes a sorting problem as to arrange the digits
+in either ascending or descending order and then distributing the digits into
+the two numbers to guaranty the maximum sum.
+
+Problem #4: Arrange 0,1,2
+This problem can be solved in a single pass through the array by keeping track
+of the next 0 and 2 positions in the array. Once we have iterated through the
+array and locate the 0 and 2 in the right position this will guaranty that the
+1 are in place. Given it is single pass the time complexity is O(N) and space
+complexity of O(1).
+
+Problem #5: Autocomplete
+This problem can be used by using Trie to generate possible words given a particular
+prefix. A trie node has two attributes is_word and its children. The insert operation
+traverses through the trie checking for when a character of the word needs to be inserted
+until the end of the word, for which the is_word attribute is set to true. This
+will reuslt in time complexity of O(N) and space complexity of O(1) where N is the
+size of the word.
+Finding a list of suffixes requires iterating and accumulating a suffix and appending the suffix
+to a list when the is_word attribute is true. This will result in time complexity of O(N)
+and worst case space complexity of O(N) where every item is a word.
+
+Problem #6: find min and max
+This problem can be solved simply by keeping track of min and max values and iterating
+through the array. If an item is smaller than the min or larger than the max then
+set the two values. This results in a time complexity of O(N) and space complexity
+of O(1) since no additional space is required.
+
+Problem #7: Router
+This problem can be solved using a trie as the underlying data structure, by storing
+the parts of a path delimited by slashes as opposed to individual characters in order
+to save space. The presence of handler denotes that a complete path is available.
+Insertion and lookup have a worst case time complexity of O(N) and space complexity
+of O(1).
